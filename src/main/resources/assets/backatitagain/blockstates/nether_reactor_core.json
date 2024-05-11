@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "stage=0": {
+      "model": "backatitagain:block/reactor_stage_0"
+    },
+    "stage=1": {
+      "model": "backatitagain:block/reactor_stage_1"
+    },
+    "stage=2": {
+      "model": "backatitagain:block/reactor_stage_2"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "block.backatitagain.nether_reactor_core": "Nether Reactor Core",
+  "block.backatitagain.glowing_obsidian": "Glowing Obsidian",
+  "itemGroup.backatitagain.retro": "Retro Items",
+
+  "block.backatitagain.nether_reactor_core.invalid": "Not the correct pattern!",
+  "block.backatitagain.nether_reactor_core.proximity": "All players need to be close to the reactor.",
+  "block.backatitagain.nether_reactor_core.too_high": "The nether reactor needs to be built lower down.",
+  "block.backatitagain.nether_reactor_core.active": "Active!"
+
+}

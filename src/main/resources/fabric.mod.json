@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "backatitagain",
+  "version": "${version}",
+  "name": "Back at it Again!",
+  "description": "Adds removed things from the past",
+  "authors": [
+    "Aikoyori"
+  ],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/backatitagain/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "xyz.aikoyori.backatitagain.client.BackAtItAgain_Client"
+    ],
+    "main": [
+      "xyz.aikoyori.backatitagain.BackAtItAgain"
+    ]
+  },
+  "mixins": [
+    "backatitagain.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
