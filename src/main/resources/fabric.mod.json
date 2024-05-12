@@ -7,7 +7,10 @@
   "authors": [
     "Aikoyori"
   ],
-  "contact": {},
+  "contact": {
+    "issues": "https://github.com/Aikoyori/BackAtItAgainFabric/issues",
+    "sources": "https://github.com/Aikoyori/BackAtItAgainFabric",
+  },
   "license": "GPL-3.0",
   "icon": "assets/backatitagain/icon.png",
   "environment": "*",
@@ -24,7 +27,6 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
 }
