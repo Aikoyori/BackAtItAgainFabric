@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "backatitagain:block/stonecutter_bottom",
+    "east": "backatitagain:block/stonecutter_side",
+    "north": "backatitagain:block/stonecutter_front",
+    "particle": "backatitagain:block/stonecutter_front",
+    "south": "backatitagain:block/stonecutter_front",
+    "up": "backatitagain:block/stonecutter_top",
+    "west": "backatitagain:block/stonecutter_side"
+  }
+}

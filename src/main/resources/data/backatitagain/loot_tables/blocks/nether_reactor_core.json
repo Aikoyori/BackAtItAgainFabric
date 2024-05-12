@@ -11,7 +11,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "backatitagain:nether_reactor_core"
+          "name": "backatitagain:nether_reactor_core",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "backatitagain:nether_reactor_core",
+              "properties": {
+                "stage": "0"
+              }
+            }
+          ]
         }
       ],
       "rolls": 1.0

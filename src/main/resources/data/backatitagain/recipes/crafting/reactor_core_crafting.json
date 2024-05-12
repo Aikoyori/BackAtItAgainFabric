@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
     },
     "D": {
-      "tag": "minecraft:diamond"
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [
@@ -15,7 +15,6 @@
     "IDI"
   ],
   "result": {
-    "count": 1,
     "item": "backatitagain:nether_reactor_core"
   }
 }

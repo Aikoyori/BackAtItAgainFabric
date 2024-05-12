@@ -1,5 +1,7 @@
 package xyz.aikoyori.backatitagain.contents.blocks.withentities.netherreactor;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,13 +17,17 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.StructureTemplate;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import xyz.aikoyori.backatitagain.BackAtItAgain;
+import xyz.aikoyori.backatitagain.utils.RegistryHelper;
 import xyz.aikoyori.backatitagain.utils.StructureCalculations;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class NetherReactorCoreBlockEntity extends BlockEntity {
@@ -103,9 +109,9 @@ public class NetherReactorCoreBlockEntity extends BlockEntity {
                     world.setBlockState(pos.add(-1,-1,1),BackAtItAgain.GLOWING_OBSIDIAN.getDefaultState());
                     world.setBlockState(pos.add(1,-1,1),BackAtItAgain.GLOWING_OBSIDIAN.getDefaultState());
                     break;
-                case 200:case 400:
+                case 200:case 300:case 400:case 500:case 600:case 700:case 800:
                     if(world.isClient) break;
-
+                    if(be.random.nextFloat()<0.5) break;
                     LootContext bld = new LootContext.Builder(new LootContextParameterSet.Builder((ServerWorld) world).build(LootContextType.create().build())).build(Optional.empty());
                     BlockPos.Mutable mut = new BlockPos.Mutable();
                     LootTable loot =
@@ -141,21 +147,26 @@ public class NetherReactorCoreBlockEntity extends BlockEntity {
                 case 961:
                     be.done = true;
             }
-            if(be.time_passed < 144){
+            if(!world.isClient())
+            {
+                Supplier<StructureTemplate.StructureBlockInfo[][][]> spireStructure =
+                        Suppliers.memoize(() -> StructureCalculations.getAllBlocksAsArray(world.getServer().getStructureTemplateManager().getTemplateOrBlank(RegistryHelper.makeID("nether_spire"))));
+                if((be.time_passed/5)<spireStructure.get()[0].length && world.getGameRules().getBoolean(BackAtItAgain.SHOULD_SPAWN_SPIRE)){
 
-                for(int i=-8;i<=8;i++){
-                    for(int j=-2;j<=Math.min(31,be.time_passed/4);j++){
+                    for(int i=-8;i<=8;i++){
+                        int j = Math.min(be.time_passed/5,spireStructure.get()[0].length-1)-3;
                         for(int k=-8;k<=8;k++){
                             Optional<BlockState> prepState =
-                                    StructureCalculations.getSpireStructureBlockStateWithStage(i,j,k,0);
-                            if(prepState.isPresent()){
-                                world.setBlockState(
-                                        pos.add(i,j,k),prepState.get());
+                                    StructureCalculations.getSpireStructureBlockStateWithStage(i,j,k,0,spireStructure.get());
+                            if (prepState.isPresent() && ((prepState.get().isAir() && world.getGameRules().getBoolean(BackAtItAgain.SHOULD_SPIRE_REPLACE_AIR)) || !prepState.get().isAir())) {                                world.setBlockState(
+                                    pos.add(i,j,k),prepState.get());
                             }
                         }
+
                     }
                 }
             }
+
             be.time_passed++;
         }
 
